@@ -1,5 +1,5 @@
 # Overview 
-- DanQ is a deep learning model that attempts to predict the function of non-coding DNA de novo (i.e directly from raw sequence, without relying on external biological data).  It uses a hybrid architecture that combines convolutional neural networks (to detect local motifs) with bi-directional recurrent layers (to capture dependencies between motifs). This design enables the model to learn both the building blocks and the regulatory grammar of gene expression.
+- DanQ is a deep learning model that predicts the function of non-coding DNA directly from raw sequence. It uses a hybrid architecture that combines convolutional neural networks (to detect local motifs) with bi-directional recurrent layers (to capture dependencies between motifs). This design enables the model to learn both the building blocks and the regulatory grammar of gene expression.
 - The problem is formulated as a multi-label classification task: given a DNA sequence, the model outputs a binary vector indicating the presence or absence of 919 different epigenetic marks.
 
 # DanQ architecture:
