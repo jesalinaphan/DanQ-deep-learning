@@ -15,6 +15,7 @@ respectively, to regularize the model
 
 # Usage 
 To generate ./data/preprocessed.csv: 
+
 __Step 1__: Download the mm10 genome and ENCODE peak datasets by running 
 ```./data/data_download.sh```
 
