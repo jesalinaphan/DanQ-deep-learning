@@ -14,37 +14,17 @@ The max pooling and BiLSTM layers also use dropouts of 0.2 and 0.5,
 respectively, to regularize the model
 
 # Usage 
----
+To generate ./data/preprocessed.csv: 
+__Step 1__: Download the mm10 genome and ENCODE peak datasets by running 
+```./data/data_download.sh```
 
-### **Step 1: Download the mm10 genome and ENCODE peak datasets**
+__Step 2__: Then generate the non-overlapping 200bps by running 
+```./data/gen_200bp.sh``` 
+Note that the above requires access to bedtools and samtools
 
-```bash
-./data/data_download.sh
-```
-
----
-
-### **Step 2: Generate non-overlapping 200bp bins**
-
-```bash
-./data/gen_200bp.sh
-```
-
-> ⚠️ Requires `bedtools` and `samtools` to be installed.
-
----
-
-### **Step 3: Generate `preprocessed.csv` by running**
-
-```bash
-python3 ./preprocessing/preprocessing.py
-```
-
----
+__Step 3__: Generate ./data/processed.cvs by running
+```python3 ./preprocessing/preprocessing.py``` 
 
 Once you have access to ./data/processed.csv, running 
-
-```bash
-python3 main.py
-```
+```python3 main.py```
 will train and evaluate the DanQ model 
