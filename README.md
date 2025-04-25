@@ -16,15 +16,15 @@ respectively, to regularize the model
 # Usage 
 To generate ./data/preprocessed.csv: 
 Step #1: Download the mm10 genome and ENCODE peak datasets by running 
-```./data/data_download.sh 
+```./data/data_download.sh```
 
 Step #2: Then generate the non-overlapping 200bps by running 
-```./data/gen_200bp.sh 
+```./data/gen_200bp.sh``` 
 Note that the above requires access to bedtools and samtools
 
 Step #3: Generate ./data/processed.cvs by running
-```python3 ./preprocessing/preprocessing.py 
+```python3 ./preprocessing/preprocessing.py``` 
 
 Once you have access to ./data/processed.csv, running 
-```python3 main.py 
+```python3 main.py```
 will train and evaluate the DanQ model 
