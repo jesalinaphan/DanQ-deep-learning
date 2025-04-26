@@ -27,6 +27,7 @@ class SequenceDataset(Dataset):
 
         onehot = self.one_hot_encode(seq)  # shape (1000, 4)
         target = torch.tensor([int(c) for c in target_str], dtype=torch.float32)
+        target = np.expand_dims(target, 0)  # shape (1, 39)
 
         onehot_tensor = torch.tensor(onehot).permute(1, 0).float()  # Turn into (4, 1000) so 1D conv can be applied
         return onehot_tensor, target
