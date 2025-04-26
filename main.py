@@ -31,7 +31,7 @@ if __name__ == '__main__':
     for i, (seq, target) in enumerate(train_loader):
         print(f"Batch {i}:")
         print("Sequence shape:", seq.shape) # (32, 4, 1000) => (batch_size, 4, 1000)
-        print("Target shape", target.shape) # (32, 1, 39) => (batch_size, 1, num_peaks)
+        print("Target shape", target.shape) # (32, 39) => (batch_size, num_peaks)
         if i == 1:
             break
 

@@ -14,7 +14,7 @@ The max pooling and BiLSTM layers also use dropouts of 0.2 and 0.5,
 respectively, to regularize the model
 
 # Usage 
-To generate ./data/preprocessed.csv: 
+If you don't have ./data/preprocessed.csv, generate it by following these steps:
 
 __Step 1__: Download the mm10 genome and ENCODE peak datasets by running 
 ```./data/data_download.sh```
