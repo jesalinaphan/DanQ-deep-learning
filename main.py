@@ -42,6 +42,7 @@ if __name__ == '__main__':
     print("loading model")
     device=torch.device('cpu')
     model=DanQ().to(device)
+    
 
     #TODO: Train 
 
