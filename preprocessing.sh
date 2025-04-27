@@ -13,8 +13,10 @@
 #SBATCH --mem-per-cpu=100G
 #SBATCH -o preprocessing_%J.log
 
-module load miniconda3/23.11.0s-odstpk5
+module load miniconda3/23.11.0s
 
-conda activate danq_env
+source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.sh 
+
+conda activate danq_env0
 
 python3 ./preprocessing/preprocessing.py
