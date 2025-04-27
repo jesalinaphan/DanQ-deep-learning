@@ -37,7 +37,7 @@ class DanQ(torch.nn.Module):
 
         #conv
         x=self.conv_layer(x)
-        x=self.relu
+        x=self.relu(x)
 
         #max pool
         x=self.pool(x)
@@ -60,4 +60,6 @@ class DanQ(torch.nn.Module):
         #output
         x=self.output(x)
         x=self.output_activation(x)
+
+        return x
 
