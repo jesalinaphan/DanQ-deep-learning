@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #SBATCH -J danq_training
+#SBATCH -p gpu
 #SBATCH --time=72:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -17,7 +18,7 @@ module load miniconda3/23.11.0s
 
 source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.sh
 
-conda activate danq_env0
+conda activate danq_env
 
 # run the training script
 python3 ./main.py
