@@ -2,13 +2,14 @@
 
 #SBATCH -J danq_training
 #SBATCH -p gpu
-#SBATCH --time=24:00:00
+#SBATCH --time=72:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=64G
 #SBATCH -o training_%J.log
 #SBATCH --gres=gpu:1
+#SBATCH --mailuse=jesalina_phan@brown.edu
 
 # SLURM JOB INFORMATION
 #***********************

@@ -9,6 +9,7 @@ import numpy as np
 from preprocessing.sequence_dataset import SequenceDataset
 from torch.utils.data import random_split, DataLoader
 from danq import DanQ
+from tqdm import tqdm
 
 def train(model, train_loader, val_loader, device, num_epochs=60, patience=5):
     """
@@ -20,9 +21,9 @@ def train(model, train_loader, val_loader, device, num_epochs=60, patience=5):
     optimizer = optim.RMSprop(model.parameters())
     
     # variables for early stopping if needed
-    best_val_loss = float('inf')
-    epochs_no_improve = 0
-    best_model_state = None
+    # best_val_loss = float('inf')
+    # epochs_no_improve = 0
+    # best_model_state = None
     
     # Training loop
     for epoch in range(num_epochs):
@@ -33,7 +34,7 @@ def train(model, train_loader, val_loader, device, num_epochs=60, patience=5):
         train_correct = 0
         train_total = 0
         
-        for sequences, targets in train_loader:
+        for sequences, targets in tqdm(train_loader):
             sequences, targets = sequences.to(device), targets.to(device)
             
             # Zero the parameter gradients
@@ -46,13 +47,13 @@ def train(model, train_loader, val_loader, device, num_epochs=60, patience=5):
             optimizer.step()
             
             # combine loss
-            train_loss += loss.item() * sequences.size(0)
+            train_loss += loss.item()
             predicted = (outputs > 0.5).float()
             train_correct += (predicted == targets).sum().item()
-            train_total += targets.numel()
+            train_total += sequences.size(0)
         
         # Calculate average training loss and accuracy
-        train_loss = train_loss / len(train_loader.dataset)
+        # train_loss = train_loss / train_total
         train_acc = train_correct / train_total
         
         # Validation 
@@ -65,22 +66,22 @@ def train(model, train_loader, val_loader, device, num_epochs=60, patience=5):
               )
         
         # Check for improvement for early stopping
-        if val_loss < best_val_loss:
-            best_val_loss = val_loss
-            epochs_no_improve = 0
-            best_model_state = model.state_dict().copy()
+        # if val_loss < best_val_loss:
+        #     best_val_loss = val_loss
+        #     epochs_no_improve = 0
+        #     best_model_state = model.state_dict().copy()
             
-            # Save the best model
-            torch.save(model.state_dict(), 'DanQ_bestmodel.pt')
-            print(f'new best model saved')
-        else:
-            epochs_no_improve += 1
-            print(f'No improvement')
+        #     # Save the best model
+        #     torch.save(model.state_dict(), 'DanQ_bestmodel.pt')
+        #     print(f'new best model saved')
+        # else:
+        #     epochs_no_improve += 1
+        #     print(f'No improvement')
             
-            if epochs_no_improve >= patience:
-                print(f'Early stopping triggered')
-                model.load_state_dict(best_model_state)
-                break
+        #     if epochs_no_improve >= patience:
+        #         print(f'Early stopping triggered')
+        #         model.load_state_dict(best_model_state)
+        #         break
     
     return model
 
