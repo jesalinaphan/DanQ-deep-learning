@@ -1,0 +1,11 @@
+## SLURM PROLOG ###############################################################
+##    Job ID : 11190613
+##  Job Name : danq_training
+##  Nodelist : gpu1401
+##      CPUs : 1
+##   Mem/CPU : 2800 MB
+## Directory : /oscar/home/jyphan/danq_project
+##   Job Started : Mon Apr 28 11:13:42 AM EDT 2025
+###############################################################################
+/var/spool/slurmd/job11190613/slurm_script: line 9: syntax error near unexpected token `<<<'
+/var/spool/slurmd/job11190613/slurm_script: line 9: `<<<<<<< HEAD'

@@ -1,0 +1,15 @@
+## SLURM PROLOG ###############################################################
+##    Job ID : 11193498
+##  Job Name : danq_training
+##  Nodelist : gpu2009
+##      CPUs : 1
+##  Mem/Node : 65536 MB
+## Directory : /oscar/home/jyphan/danq_project
+##   Job Started : Mon Apr 28 03:04:41 PM EDT 2025
+###############################################################################
+Traceback (most recent call last):
+  File "/oscar/home/jyphan/danq_project/./main.py", line 11, in <module>
+    from danq import DanQ
+  File "/oscar/home/jyphan/danq_project/danq.py", line 6, in <module>
+    import h5py
+ModuleNotFoundError: No module named 'h5py'
