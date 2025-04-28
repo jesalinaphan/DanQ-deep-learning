@@ -56,7 +56,7 @@ def evaluate(model, data_loader, device, criterion):
     all_targets = []
 
     with torch.no_grad():
-        for sequences, targets in tqdm(data_loader):
+        for sequences, targets in tqdm(data_loader, desc=f"Evaluating"):
             sequences, targets = sequences.to(device), targets.to(device)
             outputs = model(sequences)
             loss = criterion(outputs, targets)
