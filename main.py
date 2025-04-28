@@ -105,7 +105,7 @@ if __name__ == '__main__':
         print("Resuming training from saved model")
 
     print("Starting training...")
-    model = train(model, train_loader, device, criterion, optimizer, num_epochs=1)
+    model = train(model, train_loader, device, criterion, optimizer, num_epochs=30)
     print("Training complete.")
 
     print("Evaluating final model...")
