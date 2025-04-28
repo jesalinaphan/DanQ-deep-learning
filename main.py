@@ -144,8 +144,8 @@ if __name__ == '__main__':
     train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
 
     # DataLoaders
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
-    val_loader = DataLoader(val_dataset, batch_size=32, num_workers=4)
+    train_loader = DataLoader(train_dataset, batch_size=200, shuffle=True, num_workers=4)
+    val_loader = DataLoader(val_dataset, batch_size=200, num_workers=4)
 
     #TODO: remove later (for testing only)
     # for i, (seq, target) in enumerate(train_loader):
@@ -163,7 +163,7 @@ if __name__ == '__main__':
 
     #TODO: Train 
     print("Starting training")
-    model = train(model, train_loader, val_loader, device, num_epochs=60, patience=5)
+    model = train(model, train_loader, val_loader, device, num_epochs=30, patience=3)
     print("Training complete")
 
     # Evaluate 
