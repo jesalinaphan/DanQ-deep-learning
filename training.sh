@@ -6,7 +6,11 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
+<<<<<<< HEAD
 #SBATCH --mem=64G
+=======
+#SBATCH --mem-per-cpu=16G
+>>>>>>> 1409ba9 (changes to training)
 #SBATCH -o training_%J.log
 #SBATCH --gres=gpu:1
 
