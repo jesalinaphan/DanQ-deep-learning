@@ -9,7 +9,7 @@ from torch.utils.data import random_split, DataLoader
 from danq import DanQ
 from tqdm import tqdm
 
-def train(model, train_loader, val_loader, device, criterion, optimizer, num_epochs=60):
+def train(model, train_loader, device, criterion, optimizer, num_epochs=60):
     for epoch in range(num_epochs):
         model.train()
         train_loss = 0.0
@@ -56,7 +56,7 @@ def evaluate(model, data_loader, device, criterion):
     all_targets = []
 
     with torch.no_grad():
-        for sequences, targets in data_loader:
+        for sequences, targets in tqdm(data_loader):
             sequences, targets = sequences.to(device), targets.to(device)
             outputs = model(sequences)
             loss = criterion(outputs, targets)
@@ -105,7 +105,7 @@ if __name__ == '__main__':
         print("Resuming training from saved model")
 
     print("Starting training...")
-    model = train(model, train_loader, val_loader, device, criterion, optimizer, num_epochs=15)
+    model = train(model, train_loader, device, criterion, optimizer, num_epochs=1)
     print("Training complete.")
 
     print("Evaluating final model...")
