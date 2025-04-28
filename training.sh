@@ -9,7 +9,7 @@
 #SBATCH --mem=64G
 #SBATCH -o training_%J.log
 #SBATCH --gres=gpu:1
-#SBATCH --mailuse=jesalina_phan@brown.edu
+#SBATCH --mail-use=jesalina_phan@brown.edu
 
 # SLURM JOB INFORMATION
 #***********************
