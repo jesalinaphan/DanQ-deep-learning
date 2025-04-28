@@ -13,7 +13,7 @@ class DanQ(torch.nn.Module):
 
         #Conv layer
         self.conv_layer=nn.Conv1d(in_channels=4,out_channels=320,kernel_size=26,padding=0)
-        self.relu=nn.ReLU
+        self.relu=nn.ReLU()
         
         #max pool
         self.pool=nn.MaxPool1d(kernel_size=13, stride=13)
@@ -22,15 +22,15 @@ class DanQ(torch.nn.Module):
         
         #BiLSTM
         self.biLSTM=nn.LSTM(input_size=320,hidden_size=320,num_layers=1,bidirectional=True,batch_first=True)
-        self.dropout2=nn.Dropout(0.2)
+        self.dropout2=nn.Dropout(0.5)
 
         #fully connected dense
         self.dense=nn.Linear(75*640, 925)
-        self.dense_activation=nn.ReLU
+        self.dense_activation=nn.ReLU()
 
         #output
         self.output=nn.Linear(925,39)
-        self.output_activation=nn.Sigmoid
+        self.output_activation=nn.Sigmoid()
 
 
     def forward(self,x):
