@@ -8,8 +8,11 @@ from preprocessing.sequence_dataset import SequenceDataset
 from torch.utils.data import random_split, DataLoader
 from danq import DanQ
 from tqdm import tqdm
+import pandas as pd
 
 def train(model, train_loader, device, criterion, optimizer, num_epochs=60):
+    results = {} #dict of results results[epoch] holds 'train_loss', 'labelwise_acc', 'f1_score',
+
     for epoch in range(num_epochs):
         model.train()
         train_loss = 0.0
@@ -41,10 +44,15 @@ def train(model, train_loader, device, criterion, optimizer, num_epochs=60):
         labelwise_acc = train_correct / total_samples
         f1 = f1_score(np.vstack(all_targets), np.vstack(all_preds), average='samples')
 
+        results[epoch] = {
+            'train_loss': avg_train_loss,
+            'labelwise_acc': labelwise_acc,
+            'f1_score': f1
+        }
         print(f"Epoch {epoch+1} | Train Loss: {avg_train_loss:.4f} | "
               f"Label-wise Acc: {labelwise_acc:.2%} | F1-score: {f1:.4f}")
 
-    return model
+    return model, results
 
 def evaluate(model, data_loader, device, criterion):
     model.eval()
@@ -97,6 +105,8 @@ if __name__ == '__main__':
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     checkpoint_path = './checkpoints/danq.pth'
+    results_path = './results/train_results.csv'
+
     if os.path.exists(checkpoint_path):
         print("Loading checkpoint...")
         checkpoint = torch.load(checkpoint_path, map_location=device)
@@ -105,15 +115,22 @@ if __name__ == '__main__':
         print("Resuming training from saved model")
 
     print("Starting training...")
-    model = train(model, train_loader, device, criterion, optimizer, num_epochs=30)
+    model, results = train(model, train_loader, device, criterion, optimizer, num_epochs=30)
     print("Training complete.")
 
-    print("Evaluating final model...")
-    final_loss, final_acc, final_f1 = evaluate(model, val_loader, device, criterion)
-
+    #save model checkpoint
     os.makedirs(os.path.dirname(checkpoint_path), exist_ok=True)
     torch.save({
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
     }, checkpoint_path)
     print("Final model saved.")
+
+    #Saving trainig results
+    os.makedirs(os.path.dirname(results_path), exist_ok=True)
+    pd.DataFrame.from_dict(results, orient='index').to_csv(results_path)
+
+    print("Evaluating final model...")
+    final_loss, final_acc, final_f1 = evaluate(model, val_loader, device, criterion)
+
+    
