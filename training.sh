@@ -18,6 +18,8 @@ module load miniconda3/23.11.0s
 
 source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.sh
 
+conda env list | grep -q danq_env || conda env create -f danq_env.yml
+
 conda activate danq_env
 
 # run the training script
