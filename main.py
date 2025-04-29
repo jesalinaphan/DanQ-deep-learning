@@ -83,7 +83,11 @@ def evaluate(model, data_loader, device, criterion):
     f1 = f1_score(np.vstack(all_targets), np.vstack(all_preds), average='samples')
 
     print(f"Validation - Loss: {avg_loss:.4f} | Label-wise Acc: {labelwise_acc:.2%} | F1-score: {f1:.4f}")
-    return avg_loss, labelwise_acc, f1
+    return {
+        'avg_loss': avg_loss,
+        'labelwise_acc': labelwise_acc,
+        'f1_score': f1
+    }
 
 
 if __name__ == '__main__':
@@ -105,7 +109,9 @@ if __name__ == '__main__':
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     checkpoint_path = './checkpoints/danq.pth'
-    results_path = './results/train_results.csv'
+    train_results_path = './results/train_results.csv'
+    test_results_path = './results/test_results.csv'
+
 
     if os.path.exists(checkpoint_path):
         print("Loading checkpoint...")
@@ -127,10 +133,15 @@ if __name__ == '__main__':
     print("Final model saved.")
 
     #Saving trainig results
-    os.makedirs(os.path.dirname(results_path), exist_ok=True)
-    pd.DataFrame.from_dict(results, orient='index').to_csv(results_path)
+    os.makedirs(os.path.dirname(train_results_path), exist_ok=True)
+    pd.DataFrame.from_dict(results, orient='index').to_csv(train_results_path)
 
     print("Evaluating final model...")
-    final_loss, final_acc, final_f1 = evaluate(model, val_loader, device, criterion)
+    test_results = evaluate(model, val_loader, device, criterion)
+
+    #Saving test results
+    os.makedirs(os.path.dirname(test_results_path), exist_ok=True)
+    pd.DataFrame.from_dict(test_results, orient='index').to_csv(test_results_path)
+
 
     
