@@ -8,7 +8,6 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=64G
 #SBATCH -o training_%J.log
-#SBATCH --gres=gpu:1
 #SBATCH --mail-use=jesalina_phan@brown.edu
 
 # SLURM JOB INFORMATION
@@ -18,6 +17,8 @@
 module load miniconda3/23.11.0s
 
 source /oscar/runtime/software/external/miniconda3/23.11.0/etc/profile.d/conda.sh
+
+conda env list | grep -q danq_env || conda env create -f danq_env.yml
 
 conda activate danq_env
 
