@@ -8,7 +8,8 @@ import numpy as np
 
 class SequenceDataset(Dataset):
     def __init__(self, csv_file):
-        self.data = pd.read_csv(csv_file)
+        self.data = pd.read_csv(csv_file, dtype={"target": str})
+
     
     def __len__(self):
         return len(self.data)
@@ -24,6 +25,9 @@ class SequenceDataset(Dataset):
     def __getitem__(self, idx):
         seq = self.data.iloc[idx]["sequence"]
         target_str = self.data.iloc[idx]["target"]
+        
+        if not isinstance(target_str, str):
+            raise ValueError(f"Expected string for target at index {idx}, got {type(target_str)}: {target_str}")
 
         onehot = self.one_hot_encode(seq)  # shape (1000, 4)
         target = torch.tensor([int(c) for c in target_str], dtype=torch.float32)
