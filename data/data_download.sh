@@ -1,4 +1,11 @@
 #!/bin/bash
+'''
+ Downloads the mm10 genome and the following peaks from ENCODE:
+ CTCF, POLR2A, GATA1, EP300, TAL1, MAFK, MAX, USF1, CHD2, E2F4, HCFC1,
+ POLR2AphosphoS2, POLR2AphosphoS5, RAD21, TCF12, USF2, ZC3H11A, ZNF384, BHLHE40,
+ CHD1, ELF1, ETS1, GABPA, JUND, KAT2A, MAZ, MEF2A, MXI1, MYC, NELFE,
+ NRF1, RCOR1, SIN3A SMC3 TBP UBTF ZKSCAN1 ZMIZ1 MYB
+'''
 
 #NOTE: should not be necessary if running on oscar but i had to brew install wget
 mkdir -p ./data/peaks
