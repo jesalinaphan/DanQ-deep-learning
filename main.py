@@ -142,6 +142,3 @@ if __name__ == '__main__':
     #Saving test results
     os.makedirs(os.path.dirname(test_results_path), exist_ok=True)
     pd.DataFrame.from_dict(test_results, orient='index').to_csv(test_results_path)
-
-
-    
